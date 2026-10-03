@@ -40,3 +40,6 @@ For each generated MVP include:
 - Repo, app URL, and actual automated test/deployment results.
 - Numbered manual steps with expected outcomes for the buyer task, applicable signup/verification/login/reset/logout, sandbox upgrade/billing/cancellation, failure states, and analytics consent.
 - Any unexercised flow clearly marked pending manual verification; founder feedback and results recorded after review.
+
+## Completed billing decision for this run
+All ideation billing TODO items were completed before implementation in requirements/mvp.md: compared four models; selected one-time30day$19project pass; specified unit, free100/paid5000, economics and rejected models; defined renewal/credits/overages as not applicable; documented failed/duplicate/refunded/disputed work, Stripe objects, authoritative metadata/cookie, idempotent fulfillment and sandbox tests. This appended completion record preserves the original reusable contract.

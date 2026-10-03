@@ -1,6 +1,6 @@
 # Founder manual test checklist
 
-Founder review: **pending**. Use only synthetic/public URLs and sandbox payment details. App: https://redirect-preflight.nex2i.com. Render cold start may take roughly a minute; retry if service is waking. No real accounts, email signup/reset or live charges exist. Analytics disabled unless its own PostHog project is configured.
+Founder review: **pending**. Automated Chromium and WebKit core checks and sandbox success/decline/replay/refund checks passed; Firefox runtime could not launch. These do not replace your review. Use only synthetic/public URLs and sandbox payment details. App: https://redirect-preflight.nex2i.com. Render cold start may take roughly a minute; retry if service is waking. No real accounts, email signup/reset or live charges exist. Analytics disabled unless its own PostHog project is configured.
 
 1. Open desktop Chrome/Safari/Firefox; also narrow to375px. Expect readable input/results, no horizontal page overflow, keyboard focus and explicit test/offline scope. Check console for errors.
 2. Click **Load example**, then **Review redirect map**. Expect9mappings, blocking conflicts/cycle/self-redirect, duplicate/chain warnings and an unmapped inventory URL. Three nonblocking sources export (services,services-new,contact); conflict/cycle/self sources omitted; contact emitted once.

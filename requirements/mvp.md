@@ -26,3 +26,8 @@ Public Nex2i/redirect-preflight repository; checkout ~/projects/mvp-ideas/redire
 
 ## Founder handoff
 Final decision report, verification log and numbered checklist are in docs/decision-report.md and docs/manual-test-checklist.md. All unmet provider/browser/customer gates must be explicit.
+
+## Actual implementation contract and review status
+Implemented in apps/api/src/analyze.ts, billing.ts, app.ts and apps/web/src/main.tsx. GET /api/config example: {freeLimit:100,maxLimit:5000,billingEnabled:true,billingMode:"test",priceUsd:19,passDays:30}. POST /api/analyze example {csv:"old_url,new_url\nhttps://example.com/a,https://example.com/b"} returns rows with row/oldUrl/newUrl/status, issues with row/severity/code/oldUrl/message, summary(inputRows/validRows/errors/warnings/exportRows/inventoryUrls), reviewedCsv, issuesCsv and explicit limitations. No tables/migrations: anonymous inputs processed in memory, Stripe authoritative order metadata. Cookie rp_project Path=/api; signed project/session, host-only.
+
+Deployment variables actually set: APP_ORIGIN=CORS_ORIGIN=https://redirect-preflight.nex2i.com; NETLIFY_PROXY_ORIGIN=https://redirect-preflight-api.onrender.com (Netlify build scope). NODE_ENV=production; separate COOKIE_SECRET, isolated STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET in Render. Telemetry variables unset. No DATABASE_URL required or shared. App/repo/API links and exact automated evidence in docs/verification.md. Actual sandbox payment,101row entitlement, webhook replay and full refund revocation passed; unresolved browser/provider scenarios explicitly marked pending. Founder review pending.
