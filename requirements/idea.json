@@ -1,0 +1,15 @@
+{
+  "status": "template",
+  "name": "Replace with the selected opportunity",
+  "buyer": "Replace with the decision-maker and daily user",
+  "trigger": "Replace with the event that starts the work",
+  "inputs": ["Replace with a concrete customer input"],
+  "accepted_output": "Replace with the operational deliverable",
+  "purchase_reason": "Replace with why and how often this is purchased",
+  "geography": "Replace with buyer geography",
+  "decision_level": "paid validation experiment",
+  "channel_hypothesis": "Replace with a specific reachable channel",
+  "acceptance_criteria": ["Replace with a measurable end-to-end criterion"],
+  "kill_conditions": ["Replace with a test outcome that stops the idea"],
+  "sensitive_data": false
+}
