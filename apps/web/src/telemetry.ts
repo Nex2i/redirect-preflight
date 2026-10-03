@@ -80,7 +80,7 @@ export function setAnalyticsConsent(granted: boolean): boolean {
   return true;
 }
 
-export async function captureTelemetry(event: 'waitlist_submit_succeeded' | 'waitlist_submit_failed'): Promise<void> {
+export async function captureTelemetry(event: 'task_succeeded' | 'task_failed'): Promise<void> {
   const loaded = await initialize();
   if (loaded && analyticsConsent() === 'granted') loaded.capture(event);
 }

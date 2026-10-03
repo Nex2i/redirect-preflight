@@ -1,49 +1,28 @@
-# MVP requirements
+# Redirect Preflight — requirements frozen before implementation
 
-The agent fills this in after autonomously selecting an idea from the research report. Follow `docs/pipeline.md`; the founder reviews the deployed result rather than approving the idea or requirement brief beforehand.
+Date: 2026-10-03. Decision: bounded paid-validation demo; willingness to pay and distribution unproven. No private data, accounts, outreach, live charges, or paid AI. Buyer: small web agency project lead. Job: review an already proposed URL redirect map before staging is available. Deterministic graph checks; no AI, URL fetching, content matching, SEO promise or live HTTP verification.
 
-## Outcome
+## Outcome and screens
+Landing promise → paste/upload CSV and optional inventory → loading → summary and row-level issues → review acknowledgment → issue export and nonblocking map export. Empty, CSV/URL validation, limit/upgrade, unavailable billing, cancelled checkout, server failure and success states. Sample data is synthetic example.com.
 
-Buyer, user, trigger, accepted output, and the smallest useful job:
+## Billing model (selected before code)
+One-time project pass, $19 USD, 30 days, up to 5000 mappings per run. Payer agency; unit is one browser-bound migration project pass. Payment precedes higher-limit processing. Free unlimited runs up to 100 mappings and full exports. Activation = first useful report; upgrade = needing over100 mappings. Existing data never auto-submits to checkout. Price unvalidated. No subscription, auto-renewal, credits, overages, or recurring cancellation. Subscription poorly fits occasional projects; credits add balance/refund burden; per-run pricing discourages corrections; one-time permanent license weakly funds continuing maintenance. A project pass permits corrections during its window. New browser/project requires separate purchase; recovery is a demo limitation.
 
-## Screens and states
+Cash assumptions: <$0.01 compute/run (unmeasured), no AI costs; model fees 3%+$0.30 = $0.87/pass, 95.4% contribution before hosting/support/tax. No new paid services. Infrastructure disposable free-compatible; customer release budget unresolved.
 
-Landing page promise, input form, processing state, result/review state, error state:
+Stripe isolated claimable sandbox only. Hosted Checkout Session, payment mode, inline USD1900 price, random project ID and expiry metadata. Reject live API keys and live events. HttpOnly host-only signed cookie identifies browser project/session, Secure in production and SameSite=Lax. Exact-origin POST checks. Stripe is authoritative payment/fulfillment record; session metadata records fulfillment and expiry. Shared idempotent fulfillment retrieves confirmed paid session, verifies amount/currency/project/product; webhooks and return polling both call it. Verified signature required. Payment failure/expiry never unlocks. Repeated/reordered events cannot extend entitlement; expiry is based on payment creation. Repeated checkout reuses unexpired open session; completed paid sessions return entitlement. Refunds/disputes revoke via authoritative expanded charge checks on every large-map run; transient provider failure denies higher limit, preserves free processing. Refund through Stripe sandbox Dashboard; demo offer full refund on unusable result within7days (hypothesis, no automatic live money movement). No subscription portal.
 
-## Billing model and pricing hypothesis
+## API contract and data
+GET /health and /api/health. GET /api/config reports free100/max5000/test billing availability. POST /api/analyze {csv,inventory?} → {rows,issues,summary,reviewedCsv,issuesCsv,limitations}; max2MB body, max5000 mapping/inventory rows, CSV RFC-style quotes/BOM/CRLF, explicit headers. GET /api/billing/status → entitled/expiry. POST /api/billing/checkout → hosted test checkout URL. POST /api/billing/webhook uses exact raw JSON and signed event. Rate limit60requests/minute per client, checkout5/minute. Origin checks on state changes. Request body/cookies/query not logged.
 
-Complete during ideation using the TODO in `docs/pipeline.md`, before implementation:
+No app DB or stored URL inputs. Render processes submitted public/synthetic URLs in memory only; output stays in page until cleared. Browser sessionStorage draft is opt-in for checkout return, visibly disclosed, clear removes it. Stripe stores payment email and pseudonymous project metadata; no URL list. No shared template database used. No customer accounts: template authentication/email/backup gate remains unmet; disposable anonymous validation demo is not customer-ready. Auth/email tests not applicable to this demo and pending if customer accounts are introduced. Optional PostHog disabled absent own-project token; consent module remains available and emits value-free events only.
 
-- Selected model (subscription, prepaid credits, pay per use, one-time, or justified hybrid), payer, billable unit, purchase frequency, and rejected alternatives:
-- Price hypothesis, currency, interval, estimated unit cost/margin, evidence, and commercial assumptions:
-- Free/trial limits, activation event, upgrade trigger, paid entitlements, and timing of payment versus work:
-- Applicable renewal/allowance reset, credit debit/expiry/rollover, usage metering/caps, cancellation, failed payment/work, and refund rules; mark unrelated rules not applicable:
-- Payment-provider objects and configuration, authoritative usage/credit/entitlement records, idempotency, checkout/account UX, and sandbox test cases with expected outcomes:
+## Acceptance verification
+Unit fixtures for each graph issue; quoted CSV/BOM/invalid widths, headers, unsafe schemes; preserve query/path case; deterministic repeat and high limits; CSV injection-safe export. API inject tests for limits, origin, error and checkout unavailable. Billing fixture tests for paid/unpaid, refund/dispute, expiry and repeated fulfillment; sandbox checkout/webhook exercises separately recorded. Build and requirement validator required. Browser visual and download tests must be recorded separately from API tests.
 
-## API contract
+## Operations and release
+Weekly scenario at20paid passes/month: maintenance0.5h, support0.5h, onboarding0.25h, selling2h, exception/review0.5h =3.75h assumed. Bad support case40passes×20min/4.33=3.08h plus fixed3.25h exceeds5h. No claims of measured low burden.
+Public Nex2i/redirect-preflight repository; checkout ~/projects/mvp-ideas/redirect-preflight. Netlify https://redirect-preflight.nex2i.com; Render isolated free API. Exact CORS_ORIGIN and APP_ORIGIN match custom hostname. NETLIFY_PROXY_ORIGIN set to actual Render origin at build. Secrets STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, COOKIE_SECRET server-only. Unclaimed Stripe sandbox expires2026-10-10. Founder review pending. Durable release requires claim/account ownership, secure customer authentication if needed, monitoring, recovery and measured buyer validation.
 
-Endpoints, request/response examples, validation, rate limits:
-
-## Data
-
-Tables, retention, deletion, export, and whether real customer data is allowed:
-
-## Acceptance tests
-
-Map each criterion in `idea.json` to an observable test:
-
-## Operations
-
-Support, onboarding, review, exceptions, and a five-hour weekly workload estimate:
-
-## Release
-
-Use a unique `<idea-slug>.nex2i.com` Netlify custom domain. Record the final Netlify and Render URLs, `NETLIFY_PROXY_ORIGIN`, exact `CORS_ORIGIN`, and optional `VITE_POSTHOG_PROJECT_TOKEN` and `VITE_POSTHOG_HOST`. After deployment, smoke test the buyer task and, when enabled, confirm a consented event reaches the MVP's PostHog project while a declined visit sends no events:
-
-## Decision record and founder handoff
-
-Selected opportunity and decision level; evidence and alternatives; assumptions and reasons for scope, pricing hypothesis, stack, and hosting choices:
-
-Repository and deployed URL; automatically verified behavior; incomplete implementation or access blockers:
-
-Manual test checklist with prerequisites, steps, expected outcomes, and cleanup. Include the core task, applicable auth/email/billing flows, failure states, and telemetry consent. Mark founder review as pending until actual results are received:
+## Founder handoff
+Final decision report, verification log and numbered checklist are in docs/decision-report.md and docs/manual-test-checklist.md. All unmet provider/browser/customer gates must be explicit.

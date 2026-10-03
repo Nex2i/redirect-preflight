@@ -1,9 +1,2 @@
-import assert from 'node:assert/strict';
-import test from 'node:test';
-import { readFileSync } from 'node:fs';
-
-test('landing page includes a form and API submission path', () => {
-  const source = readFileSync(new URL('../src/main.tsx', import.meta.url), 'utf8');
-  assert.match(source, /<form onSubmit={submit}>/);
-  assert.match(source, /\/api\/waitlist/);
-});
+import{test}from'node:test';import assert from'node:assert/strict';import{readFileSync}from'node:fs';
+test('frontend invokes real API workflow and server-owned billing; no waitlist',()=>{const s=readFileSync(new URL('../src/main.tsx',import.meta.url),'utf8');assert(s.includes('/api/analyze'));assert(s.includes('/api/billing/checkout'));assert(!s.includes('/api/waitlist'));assert(s.includes('Plan review only'));});
