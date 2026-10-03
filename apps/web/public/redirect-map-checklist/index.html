@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Website Migration Redirect Map Checklist &amp; CSV Template | Redirect Preflight</title>
+<meta name="description" content="Prepare a website migration redirect CSV: review source URLs, destination conflicts, loops, chains and inventory gaps, then verify redirects on staging and after launch.">
+<link rel="canonical" href="https://redirect-preflight.nex2i.com/redirect-map-checklist/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/guide.css">
+<meta property="og:type" content="article"><meta property="og:title" content="Website Migration Redirect Map Checklist &amp; CSV Template"><meta property="og:description" content="A practical checklist for reviewing a proposed redirect CSV before staging, with a free downloadable template."><meta property="og:url" content="https://redirect-preflight.nex2i.com/redirect-map-checklist/"><meta name="twitter:card" content="summary">
+</head><body><main>
+<nav><a href="/">↳ Redirect Preflight</a> · Migration planning guide</nav>
+<article><h1>Website migration redirect map checklist</h1>
+<p>Before a developer installs redirects, review the proposed mapping of old URLs to new destinations. A tidy CSV makes decisions visible: which pages move, which stay, and which need a separate removal decision.</p>
+<p>This checklist is for agency project leads reviewing literal URL maps. It separates problems you can find in a plan from problems you can only confirm once a server is configured.</p>
+<h2>1. Build the source inventory</h2>
+<p>Collect the old URLs relevant to your migration from your existing sitemap, an authorized site crawl and your own traffic or backlink records. Keep a copy outside this tool. A sitemap alone may miss older URLs that still receive visits.</p>
+<p>Decide which URLs move and which remain at the same address. Do not create a redirect to the identical URL. Record intentional removals separately; an uncovered inventory URL is a review question, not automatically an error.</p>
+<h2>2. Prepare a redirect CSV</h2>
+<p>Use one proposed mapping per row with absolute HTTP(S) URLs. Redirect Preflight accepts <code>old_url,new_url,status</code>; status is optional and defaults to 301. The tool accepts permanent 301 and 308 redirects.</p>
+<pre>old_url,new_url,status
+https://example.com/old-service,https://example.com/services,301
+https://example.com/old-about,https://example.com/about,301</pre>
+<p><a href="/redirect-map-template.csv" download>Download the two-row CSV template</a>. Replace the synthetic example.com URLs with your own public URLs. Quote CSV fields that contain commas.</p>
+<p>Preserve meaningful differences in path case, query strings and trailing slashes. This checker compares literal URL identities; it does not model your server's normalization rules, wildcard patterns or regular expressions.</p>
+<h2>3. Review the map before staging</h2>
+<ul>
+<li><strong>Conflicting destinations:</strong> one old URL points to different new URLs. Choose the intended destination before implementation.</li>
+<li><strong>Self redirects:</strong> a URL redirects to itself. Remove the rule or choose the correct destination.</li>
+<li><strong>Loops:</strong> following proposed rules returns to an earlier URL. Break the cycle and review any rules that lead into it.</li>
+<li><strong>Chains:</strong> A points to B and B points to C. Review whether A can go directly to the intended final destination. Do not collapse a chain without checking that destination's meaning.</li>
+<li><strong>Duplicates:</strong> the same mapping appears repeatedly. Remove redundant records so the handoff is easier to inspect.</li>
+<li><strong>Inventory gaps:</strong> an old URL has no proposed rule. Confirm whether it remains unchanged, needs a redirect or is intentionally removed.</li>
+</ul>
+<p><a class="cta" href="/">Check up to 100 mappings free →</a></p>
+<p class="note">The checker never fetches URLs. Use public or synthetic URL lists only. Its report cannot establish that a destination exists, is relevant or is indexable, and cannot guarantee a search ranking outcome.</p>
+<h2>4. Review exports with your developer</h2>
+<p>Download all findings to preserve the review trail. The nonblocking-map export omits invalid, conflicting and cyclic sources, including paths into those sources, and keeps identical sources once. Chains remain for manual review. A clean export is still a proposed plan, not a verified server configuration.</p>
+<h2>5. Verify on staging and after launch</h2>
+<p>Once redirects are implemented, check actual HTTP responses, final destinations and unexpected redirect chains with your developer or a live crawler. Review destination content, crawl access, canonical URLs, internal links and the new sitemap. Recheck important old URLs after launch and monitor indexing in Search Console.</p>
+<p>For the wider migration process, use <a href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes">Google's official site-move guidance</a>. Redirect planning is only one part of that process.</p>
+<h2>Common questions</h2>
+<h3>Can I check a redirect map before the new site is live?</h3>
+<p>Yes. You can detect structural problems in the proposed CSV before staging exists. Live HTTP behavior and destination quality require later verification.</p>
+<h3>Will this generate the right destination for every page?</h3>
+<p>No. Bring an existing proposed map. A person familiar with the pages must decide whether each destination is appropriate.</p>
+<h3>What does the free checker include?</h3>
+<p>Up to 100 mapping records per run, full findings and CSV exports. The larger-map project pass is currently a Stripe test-mode experiment, not a live purchase.</p>
+</article><footer>Written by Nex2i for Redirect Preflight · Updated October 3, 2026<br><a href="/">Open the checker</a> · <a href="https://github.com/Nex2i/redirect-preflight">Source and review checklist</a></footer>
+</main></body></html>

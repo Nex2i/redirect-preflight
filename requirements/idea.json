@@ -1,3 +1,28 @@
 {
- "status":"ready","name":"Redirect Preflight","buyer":"Owner or project lead of a small web agency","trigger":"A site migration redirect map is ready for review before staging is configured","inputs":["CSV with old_url,new_url,status columns and absolute HTTP(S) URLs","Optional old URL inventory, one absolute URL per line"],"accepted_output":"Row-numbered conflicts, duplicates, loops, chains, and uncovered inventory report plus reviewed mapping CSV","purchase_reason":"One project pass for an occasional migration; repeat only for a new migration","geography":"English-speaking agencies, US first","decision_level":"paid validation experiment via test-mode demo","channel_hypothesis":"Public useful migration sample and opt-in agency discovery; access unproven","acceptance_criteria":["Known fixture flags conflict, duplicate, self redirect, cycle, chain and missing inventory with row numbers","Malformed CSV and unsafe URL schemes are rejected with actionable errors","Free tier accepts 100 mappings; larger maps require a confirmed test purchase and are capped at 5000","Reviewed export omits sources with blocking issues and includes explicit offline limitations","Checkout cancellation or failed/unpaid session never grants entitlement; repeated fulfillment is idempotent"],"kill_conditions":["Three unrelated agency buyers cannot be recruited or decline a 19 USD project pass","Existing tools or spreadsheets produce accepted deliverable as quickly","Median support exceeds 15 minutes per project or total weekly operations exceed five hours"],"sensitive_data":false
+  "status": "ready",
+  "name": "Redirect Preflight",
+  "buyer": "Owner or project lead of a small web agency",
+  "trigger": "A site migration redirect map is ready for review before staging is configured",
+  "inputs": [
+    "CSV with old_url,new_url,status columns and absolute HTTP(S) URLs",
+    "Optional old URL inventory, one absolute URL per line"
+  ],
+  "accepted_output": "Row-numbered conflicts, duplicates, loops, chains, and uncovered inventory report plus reviewed mapping CSV",
+  "purchase_reason": "One project pass for an occasional migration; repeat only for a new migration",
+  "geography": "English-speaking agencies, US first",
+  "decision_level": "paid validation experiment via test-mode demo",
+  "channel_hypothesis": "Organic search only; useful redirect-map checker, public migration checklist and CSV template. No advertising. Search demand and conversion remain unproven.",
+  "acceptance_criteria": [
+    "Known fixture flags conflict, duplicate, self redirect, cycle, chain and missing inventory with row numbers",
+    "Malformed CSV and unsafe URL schemes are rejected with actionable errors",
+    "Free tier accepts 100 mappings; larger maps require a confirmed test purchase and are capped at 5000",
+    "Reviewed export omits sources with blocking issues and includes explicit offline limitations",
+    "Checkout cancellation or failed/unpaid session never grants entitlement; repeated fulfillment is idempotent"
+  ],
+  "kill_conditions": [
+    "Three unrelated agency buyers cannot be recruited or decline a 19 USD project pass",
+    "Existing tools or spreadsheets produce accepted deliverable as quickly",
+    "Median support exceeds 15 minutes per project or total weekly operations exceed five hours"
+  ],
+  "sensitive_data": false
 }

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://redirect-preflight.nex2i.com/sitemap.xml

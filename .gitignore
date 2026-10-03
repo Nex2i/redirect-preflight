@@ -8,3 +8,5 @@ dist/
 *.tsbuildinfo
 manual-fixtures/
 *.png
+
+apps/web/dist-server/

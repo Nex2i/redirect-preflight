@@ -54,3 +54,10 @@ The template's universal auth/email/customer persistence release gate is **not m
 Two independent scopes produced50ideas each,19deeper screens, and one skeptic reviewed five finalists. Main verified critical Google/procurement/competitor pages and normalized scores.100IDs/names unique; buyer/task/output semantic deduplication reviewed. Most catalog rows are hypotheses with explicit manual/DIY substitutes, not100validated markets. Stripe Directory was tried first using current temporary CLI1.53.0/plugin0.3.5 and rejected the user agent; official-web fallback disclosed. Full commercial uncertainty remains.
 
 Actual repository/deployment links, CI checks, browser/payment exercises and remaining gaps are recorded in docs/verification.md. Founder manual review remains pending until real feedback.
+
+## Organic acquisition and SEO — October 3, 2026
+Founder constraint: no ads for this product. Acquisition hypothesis is organic search through the free redirect map checker and a practical migration checklist/CSV template. No advertising spend, tracking pixels or paid SEO services. Search demand, rankings and conversion remain unmeasured.
+
+Technical setup: build-time prerendered homepage hydrated by React; descriptive title/description, canonical HTTPS custom domain, social metadata, WebApplication identity schema; indexable static checklist with official source and downloadable synthetic template; crawlable internal links; robots.txt references a two-page sitemap.xml; Netlify default hostname redirects to custom domain, index.html redirects to clean paths, nonexistent URLs return404. Checkout query variants canonicalize to the homepage. API paths carry noindex and are excluded from crawl.
+
+Search Console ownership, sitemap submission, URL Inspection, confirmed Google indexing and field Core Web Vitals are pending. Technical eligibility does not prove rankings or a viable organic acquisition channel. Track impressions/clicks for the checker and checklist, successful reports, and qualified agency feedback before expanding content. Keep content specific to literal offline map review; do not promise SEO results.

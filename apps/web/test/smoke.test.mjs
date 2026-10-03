@@ -1,2 +1,2 @@
 import{test}from'node:test';import assert from'node:assert/strict';import{readFileSync}from'node:fs';
-test('frontend invokes real API workflow and server-owned billing; no waitlist',()=>{const s=readFileSync(new URL('../src/main.tsx',import.meta.url),'utf8');assert(s.includes('/api/analyze'));assert(s.includes('/api/billing/checkout'));assert(!s.includes('/api/waitlist'));assert(s.includes('Plan review only'));});
+test('frontend invokes real API workflow and server-owned billing; no waitlist',()=>{const s=readFileSync(new URL('../src/App.tsx',import.meta.url),'utf8');assert(s.includes('/api/analyze'));assert(s.includes('/api/billing/checkout'));assert(!s.includes('/api/waitlist'));assert(s.includes('Plan review only'));});

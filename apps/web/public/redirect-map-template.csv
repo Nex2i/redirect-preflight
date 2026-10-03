@@ -1,0 +1,3 @@
+old_url,new_url,status
+https://example.com/old-service,https://example.com/services,301
+https://example.com/old-about,https://example.com/about,301
