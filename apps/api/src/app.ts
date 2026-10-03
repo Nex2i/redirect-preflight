@@ -9,7 +9,7 @@ export function createApp(options:{origin?:string;key?:string;webhookSecret?:str
  const billing=makeBilling(options.key);const enabled=Boolean(billing.stripe&&options.webhookSecret);const budgets=new Map<string,{at:number;n:number}>();
  app.register(cors,{origin,methods:['GET','POST']});
  app.addHook('onRequest',async(req,reply)=>{
-  reply.header('Cache-Control','no-store');reply.header('X-Content-Type-Options','nosniff');
+  reply.header('X-Robots-Tag','noindex');reply.header('Cache-Control','no-store');reply.header('X-Content-Type-Options','nosniff');
   if(req.method==='POST'&&req.url!=='/api/billing/webhook'&&req.headers.origin!==origin)return reply.code(403).send({error:'Request origin is not allowed.'});
   if(req.url==='/api/billing/webhook')return;
   const now=Date.now(),id=req.ip+(req.url.startsWith('/api/billing/checkout')?':checkout':':task');
