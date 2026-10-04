@@ -16,7 +16,11 @@ export default function App({previewOnly=false}:{previewOnly?:boolean}){
  const[csv,setCsv]=useState(''),[inventory,setInventory]=useState(''),[report,setReport]=useState<Report|null>(null),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[reviewed,setReviewed]=useState(false),[filter,setFilter]=useState('all'),[billing,setBilling]=useState(false),[paid,setPaid]=useState(false),[expiry,setExpiry]=useState(''),[saveDraft,setSaveDraft]=useState(false),[consent,setConsent]=useState<'granted'|'denied'|'unset'>('unset');
  useEffect(()=>{
   setConsent(analyticsConsent());
-  if(previewOnly){setNotice('Public portfolio preview. Use Open app for account and checkout flows.');return;}
+  if(previewOnly){
+   setNotice('Public portfolio preview. Use Open app for account and checkout flows.');
+   const closePreview=(event:KeyboardEvent)=>{if(event.key!=='Escape')return;try{const parentOrigin=new URL(document.referrer).origin;if(['https://nex2i.com','https://www.nex2i.com'].includes(parentOrigin))window.parent.postMessage({type:'nex2i:preview-close'},parentOrigin);}catch{}};
+   document.addEventListener('keydown',closePreview);return()=>document.removeEventListener('keydown',closePreview);
+  }
   fetch('/api/config').then(r=>r.ok?r.json():Promise.reject()).then(d=>setBilling(d.billingEnabled)).catch(()=>setNotice('API may be waking up. You can prepare your input and try again.'));
   const params=new URLSearchParams(location.search);
   if(params.has('checkout')){try{const draft=JSON.parse(sessionStorage.getItem('rp:draft')||'null');if(draft){setCsv(draft.csv);setInventory(draft.inventory);setSaveDraft(true);}}catch{}if(params.get('checkout')==='cancelled')setNotice('Checkout cancelled. Your free reports remain available.');else setNotice('Checking your test payment…');history.replaceState({},'',location.pathname);}
