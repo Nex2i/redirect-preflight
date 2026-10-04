@@ -5,5 +5,5 @@ import {startTelemetry} from './telemetry';
 import './style.css';
 void startTelemetry();
 const root=document.getElementById('root')!;
-const app=<React.StrictMode><App/></React.StrictMode>;
+const app=<React.StrictMode><App previewOnly={location.pathname==='/portfolio-preview/'}/></React.StrictMode>;
 if(root.hasChildNodes()) hydrateRoot(root,app); else createRoot(root).render(app);
